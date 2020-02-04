@@ -14,12 +14,13 @@ public class IngenieriaCivlAppss {
     public static void main(String[] args) {
 
         SwingUtilities.invokeLater( new Runnable() {
+
             public void run() {
-        
                 InterGraf IG = new InterGraf();
-                System.out.println("Hola mundo: Un app sensicha de ingeniería civil, para utilidades de desarrollo y planeacion de proyectos de esa especialidad");
-                                
+                System.out.println(" Se imprime cadena de caracteres en consola desde el metodo run() de la c.a Runnable. Que a su vez se manda a llamar desde el cuerpo del metodo MAIN ");
+                
             }//fin del metodo RUN
+
         } ); //fin de clase interna anonima
         
         
