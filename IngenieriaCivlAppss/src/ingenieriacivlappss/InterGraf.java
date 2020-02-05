@@ -24,6 +24,7 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
+
 //DESCRIPCION DE LA CLASE:
 //En conjunto con la demas clases que vayamos creando, esta clase se encarga de proporcionar todos los elementos de interfaz grafica que necesite la APP.
 //El comportamiento de los objetos de la interfaz y lo todo los audiovisual SI son propios de esta clase.
@@ -43,7 +44,7 @@ public class InterGraf extends JFrame implements ActionListener, MouseListener, 
     private Font fuenteStd = new Font( "Arial",1,12 ); //primerArg: nombre, segundoArg: stylo, tercerArg: tamanho
     
     
-    public InterGraf() {
+    public InterGraf() {//metodo constructor
     
         inicializarAtbs(); //inicializa atributos
         armarPanelesdContenido(); //construye los paneles principales
@@ -97,7 +98,7 @@ public class InterGraf extends JFrame implements ActionListener, MouseListener, 
         Box bx00 = Box.createHorizontalBox(); //se hace una caja para almacenar los componentes de una "linea de objetos/componentes"
         JTextField in_tamanhoLado = new JTextField( "200xDefault" ); // inicializa Primer elemento de la "linea de objetos"
         JButton btn_ModificarLado = new JButton( ">>_GO_<<" );  //inicializa Segundo elemento e la "linea de objetos"
-        btn_ModificarLado.addActionListener( pdt ); //agrega listenber a Tercer elementos de la "linea de objetos"
+        btn_ModificarLado.addActionListener( this ); //agrega listenber a Tercer elementos de la "linea de objetos"
         JLabel arrayJL[] = new JLabel[250]; // Se declaran 150 etiquetas para hacer espacio...
         JPanel panelInfoFigura = new JPanel( new GridLayout( 250,1 ) ); //Un panel exclusivo para las etiquetas de arriba 
         bx00.add( new JLabel( "Lado en pixeles: ") );       // Se agregan a la caja box00
@@ -108,6 +109,9 @@ public class InterGraf extends JFrame implements ActionListener, MouseListener, 
         panelInfoFigura.add( new JLabel( "CARAKTERISTICAS PRINCIPALES DELA FIGURA SELECCIONADA" ));     //Se agrega al panelIzquierdo
         panelInfoFigura.add( new JLabel() );                                                            //Se agrega al panelIzquierdo
         panelInfoFigura.add( bx00 );                                                                    //Se agrega al panelIzquierdo
+        panelInfoFigura.add( new JLabel( "" ));
+        panelInfoFigura.add( new JLabel( "" ));
+        panelInfoFigura.add( new JLabel( "Intente redimensionar la ventana donde corre el programa" ));
         for( int i=0;i<200;i++ ) { 
             if(i<5) panelInfoFigura.add( new JLabel() ); //condicional para que dibuje espacio en blanco
             else { //La mayoria de las iteraciones entran aki
@@ -168,7 +172,7 @@ public class InterGraf extends JFrame implements ActionListener, MouseListener, 
     
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        if( e.getActionCommand()==">>_GO_<<" ) repaint(); //repinta el frame general, dibujando un nuevo cuadrado amarillo
     }
 
     @Override
