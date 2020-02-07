@@ -24,11 +24,13 @@ import javax.swing.border.TitledBorder;
 //las figuras arriba mencionadas con su PuntoCritico o punto de ubicacion tambien variable
 //las figuras arriba mencionadas con sus dimansiones variables
 
-public class PizarrondTrabajo extends JPanel implements ActionListener, MouseListener, MouseMotionListener{
+public class PizarrondTrabajo extends JPanel {
 
     
-    private Rectangle rect00;
-    private Graphics almacenGrap;
+    private RectangTipo00 rectCreado;
+    
+    private RectangTipo00 rectangulosIniciales[] = new RectangTipo00[100];
+    
             
     public PizarrondTrabajo() {
      
@@ -36,6 +38,7 @@ public class PizarrondTrabajo extends JPanel implements ActionListener, MouseLis
         setBackground( Color.PINK ); //establece el fondo de toda el area de trabajo
         
         
+        for( int j=0;j<100;j++ ) rectangulosIniciales[j] = new RectangTipo00();
         
         
     }//fin del constructor del Pizarrondtrabajo
@@ -46,82 +49,47 @@ public class PizarrondTrabajo extends JPanel implements ActionListener, MouseLis
         //aqui incluir el codigo que llame al metodo obtener texto/numero, de cierto componente/objeto perteneciente a la interfaz
         //se requiere que en todo momento esté establecido y mostrando un valor la caja tipo jtextfield 
         //agregar en la construccion de la interfaz grafik un boton que le facilite al usuario "hacer una nueva figura", con todos sus parametros aleatoriamente
-        almacenGrap = g;
-        rect00 = new Rectangle( 50,50,200,200 );
-        super.paintComponent( almacenGrap );
-        almacenGrap.setColor( Color.ORANGE ); //
-        plasmarRectngRednDft( rect00,almacenGrap ); //idibuja un rectangulo relleno
-    }//fin del metodo pintarComponente, heredado de ?JPanel
-    
-    public void paintComponent( Graphics g, String s, int i ) { //metodo sobrecargado
+        Random rdm = new Random();
+        int array[] = { rdm.nextInt(750),rdm.nextInt(600),10,10 };
+        rectCreado = new RectangTipo00( array, Color.RED,"el_number1" );
+       
+        super.paintComponent( g );
+        g.setColor( rectCreado.getColorRell() ); //
+        dibujarRectangu( rectCreado, g );
         
-        //
+        for( int j=0;j<rectangulosIniciales.length;j++ ) {
+            if( debeSerDib( rectangulosIniciales[j] ) ) {
+                g.setColor( rectangulosIniciales[j].getColorRell() );
+                dibujarRectangu( rectangulosIniciales[j], g );
+            }else{}
+        }
+        
+        
+    }//fin del metodo pintarComponente, heredado de ?JPanel
+
+    public boolean debeSerDib( RectangTipo00 r ) {
+        
+        return true;
     }
     
     
     
-    
-    
-    public void plasmarRectngRednDft( Rectangle r, Graphics g ) { //metodo que recibe por parametros, 1(el rectangulo a dibujar), 2(La interfaz dibujante, en este caso G minuscula)
-   
-        Random rndm = new Random(); //declara e inicializa un nuevo obejto Random
-        int cordX = rndm.nextInt( 300 ); //declara y crea un numero aleatorio X
-        int cordY = rndm.nextInt( 300 ); //declara y crea un numero aleatorio Y
-        int redondeo = rndm.nextInt( 100 ) - rndm.nextInt( 50 ); //declara y crea un numero aleatorio RENDONDEO
-        g.fillRoundRect( cordX,cordY,r.width,r.height,redondeo,redondeo); //Dibuja un rectangulorelleno con los parametros especifikos
-                
-    }//fin delbloque de metodo PLASMAR_RECTANGULO_REDONDEADO-DEFAULT
-
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-//METODOS DE LISTENER-----------------------------------------------------------------------------------
-//METODOS DE LISTENER-----------------------------------------------------------------------------------
-//METODOS DE LISTENER-----------------------------------------------------------------------------------
-    public void actionPerformed( ActionEvent e ) {
-        System.out.println( "Se ha descencadenado un evento" + e.toString() + "mensaje desde: actionperformed de la clase Pizarron");
-    }//findel metodo
-
-    public void mouseClicked(MouseEvent e) {
-    
-    }//findel metodo
-
-    public void mousePressed(MouseEvent e) {
-    
-    }//findel metodo
-
-
-    public void mouseReleased(MouseEvent e) {
+    public void dibujarRectangu( RectangTipo00 r, Graphics g ) {
         
-    }//findel metodo
+        g.fillRoundRect( r.getEquis(), r.getLle(), r.getAncho(), r.getAlto(), 10, 10 );
+        
+    }//fin del metodo dibujar Rectangulo
+    
+    
+    
+    public RectangTipo00[] getRectInici() {
+        return this.rectangulosIniciales;
+    }
 
-    public void mouseEntered(MouseEvent e) {
     
-    }//findel metodo
-
+  
     
-    public void mouseExited(MouseEvent e) {
     
-    }//findel metodo
-
-    
-    public void mouseDragged(MouseEvent e) {
-    
-    }//findel metodo
-
- 
-    public void mouseMoved(MouseEvent e) {
-   
-    }//findel metodo
     
     
 }//fin del bloquede codigo de la clase

@@ -23,8 +23,6 @@ public class IngenieriaCivlAppss {
 
         } ); //fin de clase interna anonima
         
-        
-        
     }//FIN DEL BLOQUE DEL METODO
     
 }//FIN DE BLOQUE DE LA CLASE
